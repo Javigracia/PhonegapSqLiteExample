@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Embedded Sql Example</title>
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/principal.js"></script>
+
+</head>
+
+<body onload="onBodyLoad()">
+    <h1>My Movies Database</h1>
+    <input type="text" name="" id="buscarTitulo" placeholder="Titulo a buscar">
+    <input type="button" value="Buscar" onClick="SearchTittle()">
+    <button onclick="window.location.href='editTittle.html?id=0'">Nuevo</button>
+    <input type="button" value="Refresh" onClick="ListDBValues()">
+    <hr>
+    <span id="databaseTable"></span>
+</body>
+
+</html>
