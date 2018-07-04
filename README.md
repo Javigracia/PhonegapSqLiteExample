@@ -1,6 +1,7 @@
 SqLite Phonegap Example:
 
-This example consists of a database of users or customers with name and surname.
-The first window displays the database data.
-Pressing new will take you to the next page where you can enter the customer's first and last name and save it or cancel it by pressing return.
-On the first page, if you put a name in the text box and press search, the result will be shown below. These items listed if clicked will take you to the next page where you can edit or delete a user or cancel by clicking back.
+New version of this application for mobile phones and browsers to have our own database of movies and series viewed, with extra fields as description to remember in the future what was the content of the movie or series. It also has fields to remember which was the last chapter seen, if it is pending to see the movie or not and if we have it downloaded to that hard drive or flash drive.
+
+The first window shows a search engine by title and the option to insert a new movie or series from the next page.
+If you click on the movie or series you are looking for, the next page will open in edit mode with the update, delete or return buttons.
+In the future I will try to add improvements like a gender field, paginated for when the table grows and some more visual details.
