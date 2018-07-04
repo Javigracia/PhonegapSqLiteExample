@@ -5,22 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Embedded Sql Example</title>
+    <title>Movies and series database</title>
 
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/principal.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 
 <body onload="onBodyLoad()">
-    <h1>My Movies Database</h1>
-    <input type="text" name="" id="buscarTitulo" placeholder="Titulo a buscar">
-    <input type="button" value="Buscar" onClick="SearchTittle()">
-    <button onclick="window.location.href='editTittle.html?id=0'">Nuevo</button>
-    <input type="button" value="Refresh" onClick="ListDBValues()">
-    <hr>
-    <span id="databaseTable"></span>
+    <div class="container-fluid">
+        <h2>My Movies Database</h2><br>
+        <input class="form-control" type="text" name="" id="buscarTitulo" placeholder="Tittle"><br>
+        <div style="display: flex; justify-content: space-between">
+            <input class="btn btn-primary" type="button" value="Search" onClick="SearchTittle()">
+            <button class="btn btn-primary" onclick="window.location.href='editTittle.html?id=0'">New</button>
+            <input class="btn btn-primary" type="button" value="Refresh" onClick="ListDBValues()">
+        </div>
+        <hr>
+        <span id="databaseTable">
+        </span>
+    </div>
 </body>
 
 </html>

@@ -25,7 +25,7 @@ function onBodyLoad() {
   db = openDatabase(shortName, version, displayName, maxSize);
 
   db.transaction(function (tx) {
-    tx.executeSql('CREATE TABLE IF NOT EXISTS User(UserId INTEGER PRIMARY KEY AUTOINCREMENT, FirstName TEXT NOT NULL, LastName TEXT NOT NULL)',
+    tx.executeSql('CREATE TABLE IF NOT EXISTS Movies(MovieId INTEGER PRIMARY KEY AUTOINCREMENT, Tittle TEXT NOT NULL, LastChapter INTEGER, Saw NCHAR NOT NULL, Description VARCHAR, WhereStored NCHAR, Downloaded NCHAR NOT NULL)',
       [], nullHandler, errorHandler);
   }, errorHandler, successCallBack);
   ListDBValues();
@@ -38,40 +38,79 @@ function ListDBValues() {
   }
 
   $('#databaseTable').html('');
+  var tabla = document.createElement("table");
+  tabla.className="table";
+  var tblHead = document.createElement("thead");
+  var fila = document.createElement("tr");
+
+  var celdaHeader = document.createElement("th");
+  var textTblHead = document.createTextNode("Id");
+  celdaHeader.appendChild(textTblHead);
+  fila.appendChild(celdaHeader);
+  var celdaHeader = document.createElement("th");
+  textTblHead = document.createTextNode("Tittle");
+  celdaHeader.appendChild(textTblHead);
+  fila.appendChild(celdaHeader);
+  var celdaHeader = document.createElement("th");
+  textTblHead = document.createTextNode("Saw");
+  celdaHeader.appendChild(textTblHead);
+  fila.appendChild(celdaHeader);
+  var celdaHeader = document.createElement("th");
+  textTblHead = document.createTextNode("Downloaded");
+  celdaHeader.appendChild(textTblHead);
+  fila.appendChild(celdaHeader);
+
+  tblHead.appendChild(fila);
+  tabla.appendChild(tblHead);
+
+  var tblBody = document.createElement("tbody");
   db.transaction(function (transaction) {
-    transaction.executeSql('SELECT * FROM User;', [],
+    transaction.executeSql('SELECT * FROM Movies;', [],
       function (transaction, result) {
         if (result != null && result.rows != null) {
           for (var i = 0; i < result.rows.length; i++) {
             var row = result.rows.item(i);
-            $('#databaseTable').append('<br>' + row.UserId + '. ' +
-              row.FirstName + ' ' + row.LastName);
+            var filabody = document.createElement("tr");
+
+            var celdabody = document.createElement("td");
+            var textoFila = document.createTextNode(row.MovieId);
+            celdabody.appendChild(textoFila);
+            filabody.appendChild(celdabody);
+            var celdabody = document.createElement("td");
+            var textoFila = document.createTextNode(row.Tittle);
+            celdabody.appendChild(textoFila);
+            filabody.appendChild(celdabody);
+            var celdabody = document.createElement("td");
+            if(row.Saw=="yes"){
+              var spanYes = document.createElement("span");
+              spanYes.className="fa fa-check";
+              celdabody.appendChild(spanYes);
+            }else{
+              var spanNo = document.createElement("span");
+              spanNo.className="fa fa-close";
+              celdabody.appendChild(spanNo);
+            }
+            filabody.appendChild(celdabody);
+            var celdabody = document.createElement("td");
+            if(row.Downloaded=="yes"){
+              var spanYes = document.createElement("span");
+              spanYes.className="fa fa-check";
+              celdabody.appendChild(spanYes);
+            }else{
+              var spanNo = document.createElement("span");
+              spanNo.className="fa fa-close";
+              celdabody.appendChild(spanNo);
+            }
+            filabody.appendChild(celdabody);
+
+            tblBody.appendChild(filabody);
+            tabla.appendChild(tblBody);
           }
         }
       }, errorHandler);
   }, errorHandler, nullHandler);
+  document.getElementById('databaseTable').appendChild(tabla);
   return;
-}
-
-function AddValueToDB() {
-  if (!window.openDatabase) {
-    alert('Databases are not supported in this browser.');
-    return;
-  }
-
-  var textName = $('#txFirstName').val();
-  var textLastName = $('#txLastName').val();
-  if (!isEmptyOrSpaces(textName) && !isEmptyOrSpaces(textLastName)) {
-    db.transaction(function (transaction) {
-      transaction.executeSql('INSERT INTO User(FirstName, LastName) VALUES (?,?)', [$('#txFirstName').val(), $('#txLastName').val()],
-        nullHandler, errorHandler);
-    });
-
-    ListDBValues();
-    return false;
-  } else {
-    alert('Algun campo esta vacío o en blanco');
-  }
 }
 
 function SearchTittle() {
@@ -83,13 +122,13 @@ function SearchTittle() {
   $('#databaseTable').html('');
   var textSearch = $('#buscarTitulo').val();
   db.transaction(function (transaction) {
-    transaction.executeSql('SELECT * FROM User where FirstName LIKE "%' + textSearch + '%";', [],
+    transaction.executeSql('SELECT * FROM Movies where Tittle LIKE "%' + textSearch + '%";', [],
       function (transaction, result) {
         if (result != null && result.rows != null) {
           for (var i = 0; i < result.rows.length; i++) {
             var row = result.rows.item(i);
-            $('#databaseTable').append('<br><a href="editTittle.html?id=' + row.UserId + '">' + row.UserId + '. ' +
-              row.FirstName + ' ' + row.LastName + '</a>');
+            $('#databaseTable').append('<br><a href="editTittle.html?id=' + row.MovieId + '">' + row.MovieId + '. ' +
+              row.Tittle + '</a>');
           }
         }
       }, errorHandler);
