@@ -1,0 +1,16 @@
+/* table, th, td{
+    border: 1px solid black;
+} */
+
+.descriptionBox{
+    height: 200px;
+    resize: none;
+}
+
+.fa-check{
+    color: green;
+}
+
+.fa-close{
+    color: red;
+}
