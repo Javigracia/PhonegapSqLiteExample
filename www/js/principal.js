@@ -4,6 +4,8 @@ var version = '1.0';
 var displayName = 'MoviesSqlDB';
 var maxSize = 65535;
 
+
+
 function errorHandler(transaction, error) {
   alert('Error: ' + error.message + ' code: ' + error.code);
 }
@@ -12,7 +14,7 @@ function successCallBack() {
   //alert("DEBUGGING: success");
 }
 
-function nullHandler() { };
+function nullHandler() {};
 
 function onBodyLoad() {
   //alert("DEBUGGING: we are in the onBodyLoad() function");
@@ -25,8 +27,7 @@ function onBodyLoad() {
   db = openDatabase(shortName, version, displayName, maxSize);
 
   db.transaction(function (tx) {
-    tx.executeSql('CREATE TABLE IF NOT EXISTS Movies(MovieId INTEGER PRIMARY KEY AUTOINCREMENT, Tittle TEXT NOT NULL, LastChapter INTEGER, Saw NCHAR NOT NULL, Description VARCHAR, WhereStored NCHAR, Downloaded NCHAR NOT NULL)',
-      [], nullHandler, errorHandler);
+    tx.executeSql('CREATE TABLE IF NOT EXISTS Movies(MovieId INTEGER PRIMARY KEY AUTOINCREMENT, Tittle TEXT NOT NULL, LastChapter INTEGER, Saw NCHAR NOT NULL, Description VARCHAR, WhereStored NCHAR, Downloaded NCHAR NOT NULL)', [], nullHandler, errorHandler);
   }, errorHandler, successCallBack);
   ListDBValues();
 }
@@ -39,7 +40,7 @@ function ListDBValues() {
 
   $('#databaseTable').html('');
   var tabla = document.createElement("table");
-  tabla.className="table";
+  tabla.className = "table";
   var tblHead = document.createElement("thead");
   var fila = document.createElement("tr");
 
@@ -81,24 +82,24 @@ function ListDBValues() {
             celdabody.appendChild(textoFila);
             filabody.appendChild(celdabody);
             var celdabody = document.createElement("td");
-            if(row.Saw=="yes"){
+            if (row.Saw == "yes") {
               var spanYes = document.createElement("span");
-              spanYes.className="fa fa-check";
+              spanYes.className = "fa fa-check";
               celdabody.appendChild(spanYes);
-            }else{
+            } else {
               var spanNo = document.createElement("span");
-              spanNo.className="fa fa-close";
+              spanNo.className = "fa fa-close";
               celdabody.appendChild(spanNo);
             }
             filabody.appendChild(celdabody);
             var celdabody = document.createElement("td");
-            if(row.Downloaded=="yes"){
+            if (row.Downloaded == "yes") {
               var spanYes = document.createElement("span");
-              spanYes.className="fa fa-check";
+              spanYes.className = "fa fa-check";
               celdabody.appendChild(spanYes);
-            }else{
+            } else {
               var spanNo = document.createElement("span");
-              spanNo.className="fa fa-close";
+              spanNo.className = "fa fa-close";
               celdabody.appendChild(spanNo);
             }
             filabody.appendChild(celdabody);
@@ -109,6 +110,7 @@ function ListDBValues() {
         }
       }, errorHandler);
   }, errorHandler, nullHandler);
+  tabla.id = "tablaMovies";
   document.getElementById('databaseTable').appendChild(tabla);
   return;
 }
@@ -138,4 +140,13 @@ function SearchTittle() {
 
 function isEmptyOrSpaces(str) {
   return str === null || str.match(/^ *$/) !== null;
+}
+
+function sort(p) {
+  rows = th, s = ((n * p) - n);
+  for (i = s; i < (s + n) && i < tr.length; i++)
+    rows += tr[i];
+  table.innerHTML = rows;
+  document.getElementById("buttons").innerHTML = pageButtons(pageCount, p);
+  document.getElementById("id" + p).setAttribute("class", "active btn btn-primary");
 }

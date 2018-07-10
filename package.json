@@ -4,8 +4,8 @@
   "displayName": "PruebaSqLite",
   "cordova": {
     "platforms": [
-      "android",
-      "browser"
+      "browser",
+      "android"
     ],
     "plugins": {
       "cordova-plugin-battery-status": {},
@@ -23,7 +23,8 @@
     }
   },
   "dependencies": {
-    "cordova-android": "~7.0.0",
+    "cordova-android": "^7.0.0",
+    "cordova-browser": "~5.0.3",
     "cordova-plugin-battery-status": "~1.2.4",
     "cordova-plugin-camera": "~2.4.1",
     "cordova-plugin-device": "~1.1.6",
@@ -35,7 +36,6 @@
     "cordova-plugin-media-capture": "~1.4.3",
     "cordova-plugin-network-information": "~1.3.3",
     "cordova-plugin-vibration": "~2.1.5",
-    "cordova-sqlite-storage": "^2.3.2",
-    "cordova-browser": "~5.0.3"
+    "cordova-sqlite-storage": "^2.3.2"
   }
 }
